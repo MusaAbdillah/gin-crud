@@ -19,8 +19,18 @@ type UpdateBookInput struct {
 	Author 	string `json:"author`
 }
 
+
+// FindBooks godoc
+// @Summary FindBooks
+// @Description fetch list of book
+// @ID FindBooks
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} models.Book
+// @Header 200 {string} Token "qwerty"
+// @Router /books [get]
 func FindBooks(c *gin.Context) {
-	fmt.Println("==Controller FindBooks==")
+	fmt.Println("==Controller F`indBooks==")
 	var books []models.Book
 	models.DB.Find(&books)
 

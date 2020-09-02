@@ -1,5 +1,14 @@
-basePath: /v2
-host: petstore.swagger.io
+definitions:
+  models.Book:
+    properties:
+      author:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+    type: object
+host: localhost:8080
 info:
   contact:
     email: support@swagger.io
@@ -12,5 +21,23 @@ info:
   termsOfService: http://swagger.io/terms/
   title: Swagger Example API
   version: "1.0"
-paths: {}
+paths:
+  /books:
+    get:
+      consumes:
+      - application/json
+      description: fetch list of book
+      operationId: FindBooks
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            $ref: '#/definitions/models.Book'
+      summary: FindBooks
 swagger: "2.0"
