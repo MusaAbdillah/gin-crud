@@ -23,6 +23,7 @@ func main(){
 	r.POST("/books", controllers.CreateBook)
 	r.GET("/books/:title", controllers.FindBook)
 	r.PATCH("/books/:title", controllers.UpdateBook)
+	r.DELETE("/books/:title", controllers.DeleteBook)
 
 	r.Run()
 }

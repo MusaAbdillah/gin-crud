@@ -67,9 +67,9 @@ func UpdateBook(c *gin.Context) {
 	}
 
 	var input UpdateBookInput
-	
-	
-	if err := c.ShouldBindJSON(&input); err != nil {
+	input_err := c.ShouldBindJSON(&input)
+
+	if input_err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -77,4 +77,19 @@ func UpdateBook(c *gin.Context) {
 	models.DB.Model(&book).Updates(input)
 
 	c.JSON(http.StatusOK, gin.H{"data": book})
+}
+
+
+func DeleteBook(c *gin.Context) {
+	var book models.Book
+	err := models.DB.Where("title = ?", c.Param("title")).First(&book).Error
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
+
+	models.DB.Model(&book).Delete(&book)
+	c.JSON(http.StatusOK, gin.H{"message": "Deleted!"})
+
 }
