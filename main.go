@@ -14,27 +14,24 @@ import(
 
 )
 
-// @title Swagger gin-crud API
+// @title Swagger Example API
 // @version 1.0
-// @description simple crud with gin framework powered by GO language.
+// @description This is a sample server Petstore server.
 // @termsOfService http://swagger.io/terms/
 
-// @contact.name musaabdillahm9@gmail.com
-// @contact.url musaabdillahm9@gmail.com
-// @contact.email musaabdillahm9@gmail.com
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
 
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
 // @host petstore.swagger.io
-// @BasePath /v
+// @BasePath /v2
 
 func main(){
 	r := gin.Default()
 
-	// swagger url
-	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json") // The url pointing to API definition
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
 	r.GET("/", func(c *gin.Context){
 		c.JSON(http.StatusOK, gin.H{"data": "hello world"})
@@ -49,5 +46,9 @@ func main(){
 	r.PATCH("/books/:title", controllers.UpdateBook)
 	r.DELETE("/books/:title", controllers.DeleteBook)
 
+	// swagger url
+	// url := ginSwagger.URL("http://localhost:8080/swagger/doc.json") // The url pointing to API definition
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	
 	r.Run()
 }
