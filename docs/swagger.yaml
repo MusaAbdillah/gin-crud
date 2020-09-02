@@ -40,4 +40,110 @@ paths:
           schema:
             $ref: '#/definitions/models.Book'
       summary: FindBooks
+    post:
+      consumes:
+      - application/json
+      description: Crete book record
+      operationId: CreateBook
+      parameters:
+      - description: Title
+        in: path
+        name: title
+        required: true
+        type: string
+      - description: Author
+        in: path
+        name: author
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            $ref: '#/definitions/models.Book'
+      summary: CreateBook
+  /books/:title:
+    get:
+      consumes:
+      - application/json
+      description: Find specify book
+      operationId: FindBook
+      parameters:
+      - description: Title
+        in: path
+        name: title
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            $ref: '#/definitions/models.Book'
+      summary: FindBook
+    patch:
+      consumes:
+      - application/json
+      description: Update specify book
+      operationId: UpdateBook
+      parameters:
+      - description: Title
+        in: body
+        name: title
+        required: true
+        schema:
+          type: string
+      - description: Author
+        in: body
+        name: author
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            $ref: '#/definitions/models.Book'
+      summary: UpdateBook
+  /books/{:title}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete specify book
+      operationId: DeleteBook
+      parameters:
+      - description: Title
+        in: path
+        name: title
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            $ref: '#/definitions/models.Book'
+      summary: DeleteBook
 swagger: "2.0"

@@ -37,6 +37,17 @@ func FindBooks(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": books})
 }
 
+// CreateBook godoc
+// @Summary CreateBook
+// @Description Crete book record
+// @ID CreateBook
+// @Accept  json
+// @Produce  json
+// @Param title path string true "Title"
+// @Param author path string true "Author"
+// @Success 200 {object} models.Book
+// @Header 200 {string} Token "qwerty"
+// @Router /books [post]
 func CreateBook(c *gin.Context) {
 	fmt.Println("==Controller CreateBook==")
 	var input CreateBookInput
@@ -54,6 +65,16 @@ func CreateBook(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
 
+// FindBook godoc
+// @Summary FindBook
+// @Description Find specify book
+// @ID FindBook
+// @Accept  json
+// @Produce  json
+// @Param title path string true "Title"
+// @Success 200 {object} models.Book
+// @Header 200 {string} Token "qwerty"
+// @Router /books/:title [get]
 func FindBook(c *gin.Context) {
 	fmt.Println("==Controller FindBook==")
 	var book models.Book
@@ -67,6 +88,17 @@ func FindBook(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
 
+// UpdateBook godoc
+// @Summary UpdateBook
+// @Description Update specify book
+// @ID UpdateBook
+// @Accept  json
+// @Produce  json
+// @Param title body string true "Title"
+// @Param author body string true "Author"
+// @Success 200 {object} models.Book
+// @Header 200 {string} Token "qwerty"
+// @Router /books/:title [patch]
 func UpdateBook(c *gin.Context) {
 	var book models.Book
 	err := models.DB.Where("title = ?", c.Param("title")).First(&book).Error
@@ -89,7 +121,16 @@ func UpdateBook(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
 
-
+// DeleteBook godoc
+// @Summary DeleteBook
+// @Description Delete specify book
+// @ID DeleteBook
+// @Accept  json
+// @Produce  json
+// @Param title path string true "Title"
+// @Success 200 {object} models.Book
+// @Header 200 {string} Token "qwerty"
+// @Router /books/{:title} [delete]
 func DeleteBook(c *gin.Context) {
 	var book models.Book
 	err := models.DB.Where("title = ?", c.Param("title")).First(&book).Error
