@@ -41,9 +41,9 @@ func main(){
 
 	r.GET("/books", controllers.FindBooks)
 	r.POST("/books", controllers.CreateBook)
-	r.GET("/books/:title", controllers.FindBook)
-	r.PATCH("/books/:title", controllers.UpdateBook)
-	r.DELETE("/books/:title", controllers.DeleteBook)
+	r.GET("/books/:id", controllers.FindBook)
+	r.PATCH("/books/:id", controllers.UpdateBook)
+	r.DELETE("/books/:id", controllers.DeleteBook)
 
 	// swagger url
 	// url := ginSwagger.URL("http://localhost:8080/swagger/doc.json") // The url pointing to API definition

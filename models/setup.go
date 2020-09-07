@@ -8,7 +8,7 @@ import(
 var DB *gorm.DB
 
 func ConnectDateBase() {
-	database, err := gorm.Open("sqlite3", "gin-crud-test.db")
+	database, err := gorm.Open("sqlite3", "/home/musa/gin-crud-test.db")
 
 	if err != nil {
 		panic("Failed to connect database!")

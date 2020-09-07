@@ -78,7 +78,7 @@ func CreateBook(c *gin.Context) {
 func FindBook(c *gin.Context) {
 	fmt.Println("==Controller FindBook==")
 	var book models.Book
-	err := models.DB.Where("title = ?", c.Param("title")).First(&book).Error
+	err := models.DB.Where("id = ?", c.Param("id")).First(&book).Error
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err})
@@ -101,7 +101,7 @@ func FindBook(c *gin.Context) {
 // @Router /books/:title [patch]
 func UpdateBook(c *gin.Context) {
 	var book models.Book
-	err := models.DB.Where("title = ?", c.Param("title")).First(&book).Error
+	err := models.DB.Where("id = ?", c.Param("id")).First(&book).Error
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
@@ -133,7 +133,7 @@ func UpdateBook(c *gin.Context) {
 // @Router /books/{:title} [delete]
 func DeleteBook(c *gin.Context) {
 	var book models.Book
-	err := models.DB.Where("title = ?", c.Param("title")).First(&book).Error
+	err := models.DB.Where("id = ?", c.Param("id")).First(&book).Error
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
