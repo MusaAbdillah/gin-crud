@@ -2,6 +2,7 @@ package controllers
 
 import (
   "github.com/gin-gonic/gin"
+  "github.com/jinzhu/gorm"
   "gin-crud/models"
   "net/http"
   "fmt"
@@ -51,6 +52,7 @@ func FindBooks(c *gin.Context) {
 func CreateBook(c *gin.Context) {
 	fmt.Println("==Controller CreateBook==")
 	var input CreateBookInput
+	var bookModel models.Book
 	
 	err := c.ShouldBindJSON(&input)
 
@@ -58,6 +60,11 @@ func CreateBook(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}  
+
+	if err := models.DB.Where("title = ?", input.Title).First(&bookModel).Error; !(gorm.IsRecordNotFoundError(err)) {
+		c.JSON(401, gin.H{"error": "Title already taken!"})
+		return
+	}
 
 	book := models.Book{Title: input.Title, Author: input.Author}
 	models.DB.Create(&book)
