@@ -14,7 +14,10 @@ func ConnectDateBase() {
 		panic("Failed to connect database!")
 	}
 
-	database.AutoMigrate(&Book{})
+	database.AutoMigrate(
+		&Book{},
+		&User{},
+	)
 
 	DB = database
 }
