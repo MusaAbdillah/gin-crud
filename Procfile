@@ -1,1 +1,1 @@
-web: currency
+web: gin-crud
